@@ -12,6 +12,8 @@
 
 # Assignments
 
-### Assigment #1 先測測看你到底會不會R，完成不了就請把第二項的練習做完，下週上課前請上傳其中一項。
+## Assigment #1 
+
+  * 先測測看你到底會不會R，完成不了就請把第二項的練習做完，下週上課前請上傳其中一項。
   * [期初R能力測驗](https://docs.google.com/document/d/1EFIz1LrYt2d4ExcZXj1VPGPSJHvgUvs1c8yusAZAbsk/edit?usp=sharing) 
   * [datacamp: Introduction to R](https://github.com/R4CSS/Assignments/blob/master/01DataCamp.md)
