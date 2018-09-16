@@ -1,8 +1,9 @@
 # DSSI107 R Part
 
 # Info
-* Hsieh, Ji-Lung 謝吉隆, Graduate Institute of Journalism, NTU
-* jerryhsieh(@)ntu.edu.tw
+* Instructor: Hsieh, Ji-Lung 謝吉隆, Graduate Institute of Journalism, NTU. jerryhsieh(@)ntu.edu.tw
+* Course assistants:
+
 
 # Calendar
 
