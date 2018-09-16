@@ -1,8 +1,20 @@
 # https://github.com/P4CSS/DSSI107
 
 # DSSI107 R Part
+
 * Instructor: Hsieh, Ji-Lung 謝吉隆, Graduate Institute of Journalism, NTU. jerryhsieh(@)ntu.edu.tw
 * Course assistants:
+* [Youtube Video for review](https://www.youtube.com/playlist?list=PLK0n8HKZQ_VfJcqBGlcAc0IKoY00mdF1B)
+
+## Recommended books
+
+* **[R for data science](http://r4ds.had.co.nz/introduction.html)**
+* **[Text mining using r](http://tidytextmining.com/)**
+* [Good jiebaR introduction](http://blog.fens.me/r-word-jiebar/)
+* http://www.rdatamining.com/
+* [Datacamp for R](https://www.datacamp.com/courses/tech:r)
+* [Online books made by Bookdown](https://bookdown.org/)
+
 
 # Announcement
 * 因為老師習慣照課程進行更新程式碼或講義，所以**每週上課前務必重新下載或clone本repository**。
