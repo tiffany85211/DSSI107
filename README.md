@@ -1,6 +1,6 @@
-# DSSI107 R Part
+# https://github.com/P4CSS/DSSI107
 
-# Info
+# DSSI107 R Part
 * Instructor: Hsieh, Ji-Lung 謝吉隆, Graduate Institute of Journalism, NTU. jerryhsieh(@)ntu.edu.tw
 * Course assistants:
 
