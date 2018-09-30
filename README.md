@@ -5,7 +5,7 @@
 * Instructor: Hsieh, Ji-Lung 謝吉隆, Graduate Institute of Journalism, NTU. jerryhsieh(@)ntu.edu.tw
 * Course assistants:
 * [Youtube Video for review](https://www.youtube.com/playlist?list=PLK0n8HKZQ_VfJcqBGlcAc0IKoY00mdF1B)
-* [Q&A 如編碼相關問題]()
+* [Q&A 如編碼相關問題](QA.md)
 
 ## Recommended books
 
