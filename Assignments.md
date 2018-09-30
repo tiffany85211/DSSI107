@@ -10,6 +10,6 @@
 
 # Assignment #2 No later than 10/07 23:59 (3 points)
 
-* 繳交方式：統一上傳.rmd檔案與.rmd檔案所generate出來的.nb.html或.html兩個檔案（務必成功generate出其中一種.html檔）。將兩個檔案壓縮後上傳。
+* 繳交方式：統一上傳.rmd檔案與.rmd檔案所generate出來的.nb.html或.html兩個檔案（務必成功generate出其中一種.html檔）。將兩個檔案壓縮後上傳。如果不會操作R markdown可以參考這個[影片說明](https://youtu.be/xVXUZShYfEI)。
 * 完成課堂R01_2 vector.Rmd與R01_4 dataframe tp theft.Rmd最末的練習。請務必用R notebook或R Markdown編寫，助教屆時將會優先看.html檔，沒有成功編譯成.html檔的會扣分。
 * 下載R01_5prac load and summarize tweet data.Rmd並嘗試對這筆資料做點分析，並提出你的發現。
