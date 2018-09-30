@@ -37,25 +37,30 @@ knitr::opts_chunk$set(echo = TRUE)
 	* `hms`		for time-of-day values.
 	* `blob`		for storing blob (binary) data.
 
-# 本課程會用到的第三方套件
-```{r}
-pkgs <- c("tidyverse", "jiebaR", "data.table", "text2vec", 
-		  "fmsb", "rpart", "randomForest", "ggmap", 
-		  "zoo", "rtweet", "tidytext", "tm", "wordcloud", 
-		  "igraph", "rgexf", "topicmodels", "RTextTools", 
-		  "tidyr", "DT")
-```
-
 # 安裝第三方套件
+
 * 偵測第三方套件是否已經安裝，否的話就安裝之。
 * `pkgs <- pkgs[!(pkgs %in% installed.packages()[,"Package"])]`先偵測看看你指定要安裝的pkgs是否已經被安裝在電腦上。這邊是從原本的pkgs找出沒有安裝在電腦上的有哪些。所以有一個NOT`!`符號。
 * `if(length(pkgs)) install.packages(pkgs)`先偵測pkgs的長度，如果還有任何需要安裝的pkgs，那麼該長度就會大於0，所以如果該長度大於0，那代表還有套件需要被安裝，就安裝在pkgs中尚未被安裝的所有套件。
 * 註：`installed.packages()`會列出所有安裝在你電腦上的套件。
 
+```{r}
+pkgs <- c("tidyverse", "jiebaR", "data.table", "text2vec", 
+		  "fmsb", "rpart", "randomForest", "ggmap", 
+		  "zoo", "rtweet", "tidytext", "tm", "wordcloud", 
+		  "igraph", "rgexf", "topicmodels", "RTextTools", 
+		  "tidyr", "DT", "knitr")
+
+# pkgs <- pkgs[!(pkgs %in% installed.packages()[,"Package"])] 
+# if(length(pkgs)) install.packages(pkgs)
+
 ```
-pkgs <- pkgs[!(pkgs %in% installed.packages()[,"Package"])] 
-if(length(pkgs)) install.packages(pkgs)
-```
+
+
+
+
+
+# 列出有哪些已經安裝的套件
 
 * 註：`sessionInfo()`會列出已經被載入目前程式環境中的所有套件。
 * `sessionInfo()`也列出被載入的基本套件`base packages`包含`stats`、`graphics`、`grDevices`、`utils`、`datasets`、`methods`、`base`等。
