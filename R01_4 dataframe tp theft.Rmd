@@ -187,9 +187,8 @@ mosaicplot(res, color=colors, border=0, off = 3,
 
 # Practice
 
-* Check what happens if you swap the time and region in tapply()
-* does it possible to extract month  by substr()?
-* (you may need to search how to extract the last n characters in R)
+1. Using mosaicplot() to check what happens if you swap the time and region in tapply()
+2. does it possible to extract month  by substr()? (you may need to search how to extract the last n characters in R)
 
 ```{r}
 x <- df$發生.現.日期
