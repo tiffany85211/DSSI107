@@ -12,4 +12,4 @@
 
 * 繳交方式：統一上傳.rmd檔案與.rmd檔案所generate出來的.nb.html或.html兩個檔案（務必成功generate出其中一種.html檔）。將兩個檔案壓縮後上傳。
 * 完成課堂R01_2 vector.Rmd與R01_4 dataframe tp theft.Rmd最末的練習。請務必用R notebook或R Markdown編寫，助教屆時將會優先看.html檔，沒有成功編譯成.html檔的會扣分。
-* 請到[政府開放資料平台](https://data.gov.tw/)找一筆你覺得比較有意義的開放資料，希望是紀錄性資料而非統計資料，每一列就是一個事件紀錄。列出你所找到的資料集名稱和超鏈結，下載它、讀取它、並計數之，嘗試以mosaicplot()或plot()繪圖。
+* 下載R01_5prac load and summarize tweet data.Rmd並嘗試對這筆資料做點分析，並提出你的發現。
