@@ -235,11 +235,11 @@ library(stringr)
 url <- "http://data.taipei/opendata/datalist/datasetMeta/download?id=68785231-d6c5-47a1-b001-77eec70bec02&rid=34a4a431-f04d-474a-8e72-8d3f586db3df"
 
 par(family=('STKaiti'))
-<<<<<<< HEAD
 df <- read.csv(url, fileEncoding = "big5")
 df <- mutate(df, time = str_sub(發生時段, 1, 2))
 df <- mutate(df, region = str_sub(發生.現.地點, 4, 5))
 df.count <- count(df, time, region)
+df.count <- filter(df.count, !time %in% c("00", "02", "06", "08", "12", "14", "18", "20"))
 df.spread <- spread(df.count, region, n, fill = 0)
 df.spread <- column_to_rownames(df.spread, "time")
 mosaicplot(df.spread, color=T, border=0, off = 3,
@@ -251,24 +251,19 @@ mosaicplot(df.spread, color=T, border=0, off = 3,
 ## by dplyr with pipepline
 ```{r}
 library(stringr)
+library(tidyverse)
 url <- "http://data.taipei/opendata/datalist/datasetMeta/download?id=68785231-d6c5-47a1-b001-77eec70bec02&rid=34a4a431-f04d-474a-8e72-8d3f586db3df"
 
 par(family=('STKaiti'))
-=======
->>>>>>> a35aa1f597fafc55d08c5c074521594e2b24d19c
-read.csv(url, fileEncoding = "big5") %>%
+
+read.csv(url, fileEncoding = "big5") %>% 
     mutate(time = str_sub(發生時段, 1, 2)) %>%
     mutate(region = str_sub(發生.現.地點, 4, 5)) %>%
     count(time, region) %>%
-    spread(region, n, fill = 0) %>%
-<<<<<<< HEAD
+    filter(!time %in% c("00", "02", "06", "08", "12", "14", "18", "20")) %>%
+    spread(region, n, fill = 0) %>% 
     column_to_rownames("time") %>% 
     mosaicplot(color=T, border=0, off = 3,
 		   main="Theft rate of Taipei city (region by hour)")
-=======
-    column_to_rownames("time") %>% View
-    mosaicplot(df, color=T, border=0, off = 3,
-		   main="Theft rate of Taipei city (region by hour)", xlab="")
->>>>>>> a35aa1f597fafc55d08c5c074521594e2b24d19c
 ```
 
