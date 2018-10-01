@@ -38,5 +38,7 @@
 
 # Images
 ![data.frame](img/dataframe.png)
+---
 ![counting](img/counting.png)
+---
 ![dplyr](img/dplyr.png)
