@@ -32,15 +32,28 @@ df <- trump_tweets_df
 
 ## Filter data
 ```{r}
-fliter.df <- df[df$favoriteCount > mean(df$favoriteCount) +2*sd (df$favoriteCount),]
+filter.df <- df[df$favoriteCount > mean(df$favoriteCount) +2*sd (df$favoriteCount),]
 # View(fliter.df)
 
-fliter.df2 <- df[df$retweetCount > mean(df$retweetCount) + 2* sd (df$retweetCount),]
+filter.df2 <- df[df$retweetCount > mean(df$retweetCount) + 2* sd (df$retweetCount),]
 # View(fliter.df2)
 
 order.df <- df[order(df$favoriteCount, decreasing = TRUE),]
 # View(order.df[1:10,])
 ```
+
+# by dplyr
+```{r}
+library(tidyverse)
+
+filter.df3 <- df %>%
+    filter(favoriteCount > mean(favoriteCount) + 2*sd(favoriteCount))
+
+filter.df4 <- df %>%
+    arrange(-favoriteCount)
+```
+
+
 
 
 ## plot histogram

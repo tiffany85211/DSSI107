@@ -37,11 +37,6 @@ df <- read.csv(url, fileEncoding = "big5")
 str(df)
 ```
 
-```{r}
-df <- read.csv("data/tptheft.csv", fileEncoding = "big5", stringsAsFactors = FALSE)
-str(df)
-```
-
 部分Mac電腦無法使用`read.csv()`從網路上取得資料又轉為`data.frame`，一個可行的辦法是先用`GET(url, write_disk("data/tptheft.csv"))`將其取回並命名為`data/tptheft.csv`，之後再用`df <- read.csv("data/tptheft.csv", fileEncoding = "big5", stringsAsFactors = FALSE)`直接讀取該檔案。
 
 ```
@@ -113,6 +108,18 @@ df$region <- substr(df$發生.現.地點, 4, 5)
 ```
 
 
+## 練習：篩去紀錄不全的年份
+
+0. 直接用列的索引篩去你認為不要的項目
+1. 建立一個年份的變數
+2. 用`table()`函式計算每個年份的出現次數
+3. 篩去不要的年份
+
+```{r}
+
+```
+
+
 # 計數、彙整、摘要
 
 * 我們要回答的第一個數據問題通常是，那XXX的案例有幾個？例如大安區有多少竊盜案？買超過10000元訂單的客戶有多少人？男生和女生會修程式課的個別有多少人？這稱為計數。
@@ -151,12 +158,22 @@ res
 ```{r}
 res5 <- dplyr::count(df, time, region)
 res6 <- tidyr::spread(res5, region, n, fill = 0)
+rownames(res6) <- res6$time
+res6$time <- NULL
 ??dplyr::count
 ```
 
 
 ## Method 4: aggregate()
 
+
+
+## 練習：篩去資料不全的時間點
+在107年前的資料時間點的區間比較少，107年後多了幾個區間，會導致那幾個時間區間的數量特別少，嘗試把這幾個區間找出來，從資料刪除之，比較好做統計。
+
+```{r}
+
+```
 
 
 # Plotting
@@ -196,5 +213,53 @@ df$month <- substr(x, 3, 4) # is this correct? Try to modify it!
 # res2 <- tapply(df$編號, list(df$month, df$region), length)
 # res2 <- tapply(df$編號, list(df$region, df$month), length)
 # mosaicplot(res2, color=colors, border=0, off = 3, main="Theft rate of Taipei city (region by hour)")
+```
+
+# Comparing base and dplyr
+
+## by base
+```{r}
+url <- "http://data.taipei/opendata/datalist/datasetMeta/download?id=68785231-d6c5-47a1-b001-77eec70bec02&rid=34a4a431-f04d-474a-8e72-8d3f586db3df"
+df <- read.csv(url, fileEncoding = "big5")
+df$time <- substr(df$發生時段, 1, 2)
+df$region <- substr(df$發生.現.地點, 4, 5)
+res5 <- dplyr::count(df, time, region)
+res6 <- tidyr::spread(res5, region, n, fill = 0)
+rownames(res6) <- res6$time
+res6$time <- NULL
+```
+
+## by dplyr
+```{r}
+library(stringr)
+url <- "http://data.taipei/opendata/datalist/datasetMeta/download?id=68785231-d6c5-47a1-b001-77eec70bec02&rid=34a4a431-f04d-474a-8e72-8d3f586db3df"
+
+par(family=('STKaiti'))
+df <- read.csv(url, fileEncoding = "big5")
+df <- mutate(df, time = str_sub(發生時段, 1, 2))
+df <- mutate(df, region = str_sub(發生.現.地點, 4, 5))
+df.count <- count(df, time, region)
+df.spread <- spread(df.count, region, n, fill = 0)
+df.spread <- column_to_rownames(df.spread, "time")
+mosaicplot(df.spread, color=T, border=0, off = 3,
+	   main="Theft rate of Taipei city (region by hour)", xlab="")
+```
+
+
+
+## by dplyr with pipepline
+```{r}
+library(stringr)
+url <- "http://data.taipei/opendata/datalist/datasetMeta/download?id=68785231-d6c5-47a1-b001-77eec70bec02&rid=34a4a431-f04d-474a-8e72-8d3f586db3df"
+
+par(family=('STKaiti'))
+read.csv(url, fileEncoding = "big5") %>%
+    mutate(time = str_sub(發生時段, 1, 2)) %>%
+    mutate(region = str_sub(發生.現.地點, 4, 5)) %>%
+    count(time, region) %>%
+    spread(region, n, fill = 0) %>%
+    column_to_rownames("time") %>% 
+    mosaicplot(color=T, border=0, off = 3,
+		   main="Theft rate of Taipei city (region by hour)")
 ```
 
