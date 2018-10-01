@@ -12,4 +12,15 @@
 
 * 繳交方式：統一上傳.rmd檔案與.rmd檔案所generate出來的.nb.html或.html兩個檔案（務必成功generate出其中一種.html檔）。將兩個檔案壓縮後上傳。如果不會操作R markdown可以參考這個[影片說明](https://youtu.be/xVXUZShYfEI)。
 * 完成課堂R01_2 vector.Rmd與R01_4 dataframe tp theft.Rmd最末的練習。請務必用R notebook或R Markdown編寫，助教屆時將會優先看.html檔，沒有成功編譯成.html檔的會扣分。
-* 下載R01_5prac load and summarize tweet data.Rmd並嘗試對這筆資料做點分析，並提出你的發現。
+* 下載R01_5prac load and summarize tweet data.Rmd，練習完，並嘗試對這筆資料做點分析，並提出你的發現。
+```{r}
+x.a <- rnorm(1000, 1, 10)
+# 1.1 Filter out extreme values out of two standard deviations
+# 1.2 Plotting the distribution of the remaining vector x.a
+# 1.3 Calculate the 25% 50% and 75% quantile of vector x.a. You may google "quantile r"
+# 1.4 Get the number between 25% to 75% and assign to x.a1
+# 1.5 Plotting x.a1
+x.b <- c("a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k")
+# 2.1 Get only elements at odd positions and assign to x.b1
+# 2.2 Truncate the first 2 elements and the last 2 elements and assign to x.b2
+```
