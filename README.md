@@ -37,6 +37,6 @@
 * Be sure to submit Assignment #1 to ceiba before the next class(No later than 10/01).
 
 # Images
-![counting](img/counting.png)
 ![data.frame](img/dataframe.png)
+![counting](img/counting.png)
 ![dplyr](img/dplyr.png)
