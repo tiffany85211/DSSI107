@@ -27,10 +27,18 @@
 ## 10/08 Read JSON
 
 ## 10/01 Read CSV to data.frame
-* Slide: [R01 Basic](https://docs.google.com/presentation/d/1gvWK2qDZuwR7lRrCLfVwfzrMBt1Dw2yFcG8LeoNgLrA/edit?usp=sharing) Downloadable!
+* Slide: [R01 Basic](https://docs.google.com/presentation/d/1gvWK2qDZuwR7lRrCLfVwfzrMBt1Dw2yFcG8LeoNgLrA/edit?usp=sharing)
+* Slide: [R02 read_csv](https://docs.google.com/presentation/d/1vzJL2YU-kWKeM66bLxRFrdXLleWC_mbRFhXi-xkDuqM/edit?usp=sharing): Taipei theft, paid maternity leave, ...
 * [Assignment #2](https://github.com/P4CSS/DSSI107/blob/master/Assignments.md#assignment-2-no-later-than-1007-2359-3-points)
 
 ##  09/17 R Basic
 * Slide: [Introducion to R for data science](https://docs.google.com/presentation/d/e/2PACX-1vTSSfrUAnwy-mlcA7I3YBj1NeCTZY6z8b--cuyOqtg-p7-GbMmF11JejhGb6sOoogBbaSKMxpYSLcem/pub?start=false&loop=false&delayms=3000)
 * Slide: [Installing R and RStudio](https://docs.google.com/presentation/d/e/2PACX-1vSNj-P2-8cJptSy-eRMKXs4eSNgLgeaCHiF22THEDkmijIXaqFA8U67T3Lp-iR0ibXssD-NHUq5DEG2/pub?start=false&loop=false&delayms=3000&slide=id.g27addf16d4_0_67)
 * Be sure to submit Assignment #1 to ceiba before the next class(No later than 10/01).
+
+# Images
+![data.frame](img/dataframe.png)
+---
+![counting](img/counting.png)
+---
+![dplyr](img/dplyr.png)
