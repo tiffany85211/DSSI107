@@ -27,7 +27,8 @@
 ## 10/08 Read JSON
 
 ## 10/01 Read CSV to data.frame
-* Slide: [R01 Basic](https://docs.google.com/presentation/d/1gvWK2qDZuwR7lRrCLfVwfzrMBt1Dw2yFcG8LeoNgLrA/edit?usp=sharing) Downloadable!
+* Slide: [R01 Basic](https://docs.google.com/presentation/d/1gvWK2qDZuwR7lRrCLfVwfzrMBt1Dw2yFcG8LeoNgLrA/edit?usp=sharing)
+* Slide: [R02 read_csv](https://docs.google.com/presentation/d/1vzJL2YU-kWKeM66bLxRFrdXLleWC_mbRFhXi-xkDuqM/edit?usp=sharing): Taipei theft, paid maternity leave, ...
 * [Assignment #2](https://github.com/P4CSS/DSSI107/blob/master/Assignments.md#assignment-2-no-later-than-1007-2359-3-points)
 
 ##  09/17 R Basic
