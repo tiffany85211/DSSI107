@@ -37,11 +37,6 @@ df <- read.csv(url, fileEncoding = "big5")
 str(df)
 ```
 
-```{r}
-df <- read.csv("data/tptheft.csv", fileEncoding = "big5", stringsAsFactors = FALSE)
-str(df)
-```
-
 部分Mac電腦無法使用`read.csv()`從網路上取得資料又轉為`data.frame`，一個可行的辦法是先用`GET(url, write_disk("data/tptheft.csv"))`將其取回並命名為`data/tptheft.csv`，之後再用`df <- read.csv("data/tptheft.csv", fileEncoding = "big5", stringsAsFactors = FALSE)`直接讀取該檔案。
 
 ```
@@ -151,6 +146,8 @@ res
 ```{r}
 res5 <- dplyr::count(df, time, region)
 res6 <- tidyr::spread(res5, region, n, fill = 0)
+rownames(res6) <- res6$time
+res6$time <- NULL
 ??dplyr::count
 ```
 
@@ -196,5 +193,35 @@ df$month <- substr(x, 3, 4) # is this correct? Try to modify it!
 # res2 <- tapply(df$編號, list(df$month, df$region), length)
 # res2 <- tapply(df$編號, list(df$region, df$month), length)
 # mosaicplot(res2, color=colors, border=0, off = 3, main="Theft rate of Taipei city (region by hour)")
+```
+
+# Comparing base and dplyr
+
+## by base
+```{r}
+url <- "http://data.taipei/opendata/datalist/datasetMeta/download?id=68785231-d6c5-47a1-b001-77eec70bec02&rid=34a4a431-f04d-474a-8e72-8d3f586db3df"
+df <- read.csv(url, fileEncoding = "big5")
+df$time <- substr(df$發生時段, 1, 2)
+df$region <- substr(df$發生.現.地點, 4, 5)
+res5 <- dplyr::count(df, time, region)
+res6 <- tidyr::spread(res5, region, n, fill = 0)
+rownames(res6) <- res6$time
+res6$time <- NULL
+```
+
+## by dplyr
+```{r}
+library(stringr)
+url <- "http://data.taipei/opendata/datalist/datasetMeta/download?id=68785231-d6c5-47a1-b001-77eec70bec02&rid=34a4a431-f04d-474a-8e72-8d3f586db3df"
+
+par(family=('STKaiti'))
+read.csv(url, fileEncoding = "big5") %>%
+    mutate(time = str_sub(發生時段, 1, 2)) %>%
+    mutate(region = str_sub(發生.現.地點, 4, 5)) %>%
+    count(time, region) %>%
+    spread(region, n, fill = 0) %>%
+    column_to_rownames("time") %>% View
+    mosaicplot(df, color=T, border=0, off = 3,
+		   main="Theft rate of Taipei city (region by hour)", xlab="")
 ```
 
