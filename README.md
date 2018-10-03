@@ -19,7 +19,7 @@
 
 
 # Announcement
-* **HOT! [Open data competition](https://github.com/P4CSS/p4css.github.io/blob/master/img/competition.jpg) for you (Due: 11/30)**
+* **HOT! [Open data conference](https://github.com/P4CSS/p4css.github.io/blob/master/img/competition.jpg) for you (Due: 11/30)**
 
 * 因為老師習慣照課程進行更新程式碼或講義，所以**每週上課前務必重新下載或clone本repository**。
 * 本門課的教學著重在「怎麼用」程式碼解決問題，所以會略過一些基本資料型態的繁瑣定義或說明。建議初學者務必熟做Datacamp上的練習，過去教學過程中證實相當多同學受益於上課內容和線上內容的對應。也可以自行找一本R的書籍，都是相當好的幫助。
