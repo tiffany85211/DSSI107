@@ -6,7 +6,7 @@
 * Course assistants:
 * [Youtube Video for review](https://www.youtube.com/playlist?list=PLK0n8HKZQ_VfJcqBGlcAc0IKoY00mdF1B)
 * [Q&A 如編碼相關問題](QA.md)
-* [Assignments]()
+* [Interesting open data](https://github.com/P4CSS/p4css.github.io/blob/master/data.md)
 
 ## Recommended books
 
