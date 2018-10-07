@@ -25,5 +25,6 @@ x.b <- c("a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k")
 # 2.2 Truncate the first 2 elements and the last 2 elements and assign to x.b2
 ```
 # Assignment #3 No later than 10/14 23:59 (3 points)
+* 在Paid maternity leave的練習中，我們繪製了最後調查年代為level 5的兩張不同國家長條圖。請嘗試修改程式碼，畫出level 4的那兩張長條圖。
 * 下載或直接讀取空氣品質資料(https://taqm.epa.gov.tw/taqm/aqs.ashx?lang=tw&act=aqi-epa&ts=1538931940046)，並依照**R02_3 read json ubike.Rmd**的方法繪製空氣品質地圖。上色應依照空氣品質監測網的上色方式。
 
