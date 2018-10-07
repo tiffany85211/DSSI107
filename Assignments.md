@@ -24,3 +24,6 @@ x.b <- c("a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k")
 # 2.1 Get only elements at odd positions and assign to x.b1
 # 2.2 Truncate the first 2 elements and the last 2 elements and assign to x.b2
 ```
+# Assignment #3 No later than 10/14 23:59 (3 points)
+* 下載或直接讀取空氣品質資料(https://taqm.epa.gov.tw/taqm/aqs.ashx?lang=tw&act=aqi-epa&ts=1538931940046)，並依照**R02_3 read json ubike.Rmd**的方法繪製空氣品質地圖。上色應依照空氣品質監測網的上色方式。
+
