@@ -40,6 +40,7 @@
 * [SlideR02 read_csv](https://docs.google.com/presentation/d/1vzJL2YU-kWKeM66bLxRFrdXLleWC_mbRFhXi-xkDuqM/edit?usp=sharing): from Taipie Theft to Paid maternity leave, ...
 * [SlideR03. read json](https://docs.google.com/presentation/d/e/2PACX-1vSHPm_O02O1BQotytOXuL6GV4crFSt90Y3Q5AzJ_Od0_ay7WBZT-Wh8Erll-3EbbbsUmaj5LyqhkWek/pub?start=false&loop=false&delayms=3000)
 * [SlideCrawler01. crawler design](https://docs.google.com/presentation/d/e/2PACX-1vRW84XoB5sFRT1Eg-GrK4smX23qoNkFffz_h8oRU4AIvJAgrrxBn8059_0UeHv_pFBks_Z37vNbLGai/pub?start=false&loop=false&delayms=3000)
+* [Assignment #3](https://github.com/P4CSS/DSSI107/blob/master/Assignments.md#assignment-3-no-later-than-1014-2359-3-points)
 
 ## W6: 10/15
 * [SlideCrawler03. HTML Parser](https://docs.google.com/presentation/d/e/2PACX-1vSGeNG6BcEUNjhZjqo1obJ9bijuMjKJ0WhEva29-AuishNv779rSC0nDShfkR5HcWp4EdlRUBaaiG0M/pub?start=false&loop=false&delayms=3000)
