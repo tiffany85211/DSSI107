@@ -16,12 +16,14 @@
 ```{r}
 x.a <- rnorm(1000, 1, 10)
 # 1.1 Filter out extreme values out of two standard deviations
+a[abs(a - mean(a)) > 2*sd(a)]
 # 1.2 Plotting the distribution of the remaining vector x.a
 # 1.3 Calculate the 25% 50% and 75% quantile of vector x.a. You may google "quantile r"
 # 1.4 Get the number between 25% to 75% and assign to x.a1
 # 1.5 Plotting x.a1
 x.b <- c("a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k")
 # 2.1 Get only elements at odd positions and assign to x.b1
+x.b[(1:length(x.b)) %% 2 == 1]
 # 2.2 Truncate the first 2 elements and the last 2 elements and assign to x.b2
 ```
 # Assignment #3 No later than 10/14 23:59 (3 points)
