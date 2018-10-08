@@ -16,7 +16,7 @@
 ```{r}
 x.a <- rnorm(1000, 1, 10)
 # 1.1 Filter out extreme values out of two standard deviations
-a1 <- x.a[abs(x.a - mean(x.a)) > 2*sd(x.a)]
+a1 <- x.a[!abs(x.a - mean(x.a)) > 2*sd(x.a)]
 
 # 1.2 Plotting the distribution of the remaining vector x.a
 # 1.3 Calculate the 25% 50% and 75% quantile of vector x.a. You may google "quantile r"
