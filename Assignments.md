@@ -28,5 +28,8 @@ x.b <- c("a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k")
 請在下列三題中選兩題做：
 * 第一題：在Paid maternity leave的練習中，我們繪製了最後調查年代為level 5的兩張不同國家長條圖。請嘗試修改程式碼，畫出level 4的那兩張長條圖。
 * 第二題：下載或直接讀取空氣品質資料(https://taqm.epa.gov.tw/taqm/aqs.ashx?lang=tw&act=aqi-epa&ts=1538931940046)，並依照**R02_3 read json ubike.Rmd**的方法繪製空氣品質地圖。上色應依照空氣品質監測網的上色方式。
-* 第三題：讀取違規藥品廣告資料(https://data.gov.tw/dataset/14196)或違規化妝品廣告資料（https://data.gov.tw/dataset/14198）或健康食品資料集（https://data.gov.tw/dataset/6951），並轉成data.frame。
+* 第三題：讀取以下資料集中的任一個並轉成Data.frame
+  * 違規藥品廣告資料(https://data.gov.tw/dataset/14196)
+  * 違規化妝品廣告資料（https://data.gov.tw/dataset/14198）
+  * 健康食品資料集（https://data.gov.tw/dataset/6951)
 
