@@ -44,6 +44,7 @@
 
 ## W6: 10/15
 * [SlideCrawler03. HTML Parser](https://docs.google.com/presentation/d/e/2PACX-1vSGeNG6BcEUNjhZjqo1obJ9bijuMjKJ0WhEva29-AuishNv779rSC0nDShfkR5HcWp4EdlRUBaaiG0M/pub?start=false&loop=false&delayms=3000)
+* [Assignment #4] https://github.com/P4CSS/DSSI107/blob/master/Assignments.md#assignment-4-try-to-scrape-10-pages-of-one-sites-listed-as-follows
 
 ## W7: 10/22
 * [SlideTM06. dplyr_trump's tweet](https://docs.google.com/presentation/d/e/2PACX-1vRNLWSWiTePNA5tmAhFcbkFWEzfa0LFiG0FENhalVpxz2lG2Z1lZ8pJHacaKHWpnC1SYhR-qxQOnKb7/pub?start=false&loop=false&delayms=3000)
