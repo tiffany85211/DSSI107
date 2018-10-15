@@ -325,7 +325,7 @@ myMap$matleave_13
 
 
 # Draw world maps
-# dev.off()
+dev.off()
 mapCountryData(myMap
                , nameColumnToPlot="matleave_13"
                , catMethod = "categorical"
@@ -411,7 +411,7 @@ head(byregion)
 
 ```{r}
 # Line ploting the 1st row
-# dev.off()
+dev.off()
 plot(unlist(byregion[1,]), type="o")
 
 # Line ploting the 2nd~6th rows
@@ -464,11 +464,11 @@ matleave <- ldata %>%
 	mutate(year2=as.POSIXct(strptime(year, "matleave_%y"))) %>%
 	mutate(year3 = strftime(year2, "%Y"))
 
-# matleave %>%
-# 	ggplot() +
-# 	aes(year3, degree) +
-# 	facet_grid(iso3~.) +
-# 	geom_bar(stat = "identity", fill = "blue")
+matleave %>%
+	ggplot() +
+	aes(year3, degree) +
+	facet_grid(iso3~.) +
+	geom_bar(stat = "identity", fill = "blue")
 
 ```
 

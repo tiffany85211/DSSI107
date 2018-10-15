@@ -166,10 +166,10 @@ ubike.df$color <- sapply(ubike.df$ratio, assignColor)
 # Recoloring geom_point by ratio
 * 最後，需要做的僅是把新產生的`ubike.df$color`餵給`geom_point()`的顏色作為參數即可。
 ```{r}
-library(ggmap)
-library(tidyverse)
-map <- get_stamenmap(center = c(-238.4514,25.0448), zoom = 13, maptype = "toner-lite")
-ggmap(map) +
+ggmap(get_googlemap(center = c(121.516898,25.055536),
+					zoom = 12,
+					maptype = 'terrain')
+	  ) +
 geom_point(data = ubike.df, 
 		   aes(lng, lat), 
 		   colour = ubike.df$color, 
