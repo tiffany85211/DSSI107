@@ -38,8 +38,9 @@ x.b1 <- x.b[(1:length(x.b)) %% 2 == 1]
   * 違規化妝品廣告資料（https://data.gov.tw/dataset/14198）
   * 健康食品資料集（https://data.gov.tw/dataset/6951)
 
-# Assignment #4 Try to scrape 10 pages of one sites listed as follows:
-* dump your data by `saveRDS(data, f)` to an `.rds` file.
-* url_dcard <- "https://www.dcard.tw/f/relationship"
-* url_104 <- "https://www.104.com.tw/jobs/search/?ro=0&keyword=%E8%B3%87%E6%96%99%E5%88%86%E6%9E%90&area=6001001000&order=1&asc=0&kwop=7&page=9&mode=s&jobsource=n104bank1"
-url_cnyes <- "https://news.cnyes.com/api/v3/search?q=%E9%B4%BB%E6%B5%B7"
+# Assignment #4 Try to scrape at least one, at most 10 pages of one sites listed as follows:
+* retrieve essential data to data.frame then dump those data to `.rds` file by `saveRDS(data, f)`.
+ * url_dcard <- "https://www.dcard.tw/f/relationship"
+ * url_104 <- "https://www.104.com.tw/jobs/search/?ro=0&keyword=%E8%B3%87%E6%96%99%E5%88%86%E6%9E%90&area=6001001000&order=1&asc=0&kwop=7&page=9&mode=s&jobsource=n104bank1"
+ * url_cnyes <- "https://news.cnyes.com/api/v3/search?q=%E9%B4%BB%E6%B5%B7"
+* Try to find at least one website whose webpage is rendered from json files.
