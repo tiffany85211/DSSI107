@@ -39,16 +39,16 @@
 ## W5: 10/08 Read JSON
 * [SlideR02 read_csv](https://docs.google.com/presentation/d/1vzJL2YU-kWKeM66bLxRFrdXLleWC_mbRFhXi-xkDuqM/edit?usp=sharing): from Taipie Theft to Paid maternity leave, ...
 * [SlideR03. read json](https://docs.google.com/presentation/d/e/2PACX-1vSHPm_O02O1BQotytOXuL6GV4crFSt90Y3Q5AzJ_Od0_ay7WBZT-Wh8Erll-3EbbbsUmaj5LyqhkWek/pub?start=false&loop=false&delayms=3000)
-* [SlideCrawler01. crawler design](https://docs.google.com/presentation/d/e/2PACX-1vRW84XoB5sFRT1Eg-GrK4smX23qoNkFffz_h8oRU4AIvJAgrrxBn8059_0UeHv_pFBks_Z37vNbLGai/pub?start=false&loop=false&delayms=3000)
 * [Assignment #3](https://github.com/P4CSS/DSSI107/blob/master/Assignments.md#assignment-3-no-later-than-1014-2359-3-points)
 
 ## W6: 10/15
-* [SlideCrawler03. HTML Parser](https://docs.google.com/presentation/d/e/2PACX-1vSGeNG6BcEUNjhZjqo1obJ9bijuMjKJ0WhEva29-AuishNv779rSC0nDShfkR5HcWp4EdlRUBaaiG0M/pub?start=false&loop=false&delayms=3000)
+* [SlideCrawler01. crawler design](https://docs.google.com/presentation/d/e/2PACX-1vRW84XoB5sFRT1Eg-GrK4smX23qoNkFffz_h8oRU4AIvJAgrrxBn8059_0UeHv_pFBks_Z37vNbLGai/pub?start=false&loop=false&delayms=3000)
 * [Assignment #4](https://github.com/P4CSS/DSSI107/blob/master/Assignments.md#assignment-4-try-to-scrape-10-pages-of-one-sites-listed-as-follows)
 * [Speech slides by Robin Wei](http://homepage.ntu.edu.tw/~ntut019/ecomicro/Big_Data_Era.pdf)
   * [post your question to sli.do](https://wall2.sli.do/event/njhca1hk)
 
 ## W7: 10/22
+* [SlideCrawler03. HTML Parser](https://docs.google.com/presentation/d/e/2PACX-1vSGeNG6BcEUNjhZjqo1obJ9bijuMjKJ0WhEva29-AuishNv779rSC0nDShfkR5HcWp4EdlRUBaaiG0M/pub?start=false&loop=false&delayms=3000)
 * [SlideTM06. dplyr_trump's tweet](https://docs.google.com/presentation/d/e/2PACX-1vRNLWSWiTePNA5tmAhFcbkFWEzfa0LFiG0FENhalVpxz2lG2Z1lZ8pJHacaKHWpnC1SYhR-qxQOnKb7/pub?start=false&loop=false&delayms=3000)
 * [SlideR05. ggplot](https://docs.google.com/presentation/d/e/2PACX-1vR0MIoaDm9YaEvop3wYAYHnr5O-kCPtK2AlS9QR8zpgeoCBQCfJ39q55VrK4RvM_UJg18JDQa1I_pgJ/pub?start=false&loop=false&delayms=3000)
 
