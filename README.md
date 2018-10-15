@@ -44,8 +44,6 @@
 ## W6: 10/15
 * [SlideCrawler01. crawler design](https://docs.google.com/presentation/d/e/2PACX-1vRW84XoB5sFRT1Eg-GrK4smX23qoNkFffz_h8oRU4AIvJAgrrxBn8059_0UeHv_pFBks_Z37vNbLGai/pub?start=false&loop=false&delayms=3000)
 * [Assignment #4](https://github.com/P4CSS/DSSI107/blob/master/Assignments.md#assignment-4-try-to-scrape-10-pages-of-one-sites-listed-as-follows)
-* [Speech slides by Robin Wei](http://homepage.ntu.edu.tw/~ntut019/ecomicro/Big_Data_Era.pdf)
-  * [post your question to sli.do](https://wall2.sli.do/event/njhca1hk)
 
 ## W7: 10/22
 * [SlideCrawler03. HTML Parser](https://docs.google.com/presentation/d/e/2PACX-1vSGeNG6BcEUNjhZjqo1obJ9bijuMjKJ0WhEva29-AuishNv779rSC0nDShfkR5HcWp4EdlRUBaaiG0M/pub?start=false&loop=false&delayms=3000)
