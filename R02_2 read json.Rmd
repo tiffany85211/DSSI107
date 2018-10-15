@@ -3,7 +3,7 @@ title: "Read JSON"
 author: "Jilung Hsieh"
 date: "2018/7/3"
 output: 
-  html_document: 
+  html_notebook: 
     number_sections: true
     highlight: textmate
     theme: spacelab
@@ -261,24 +261,43 @@ C-3PO, 180, 500
 
 
 
-# 安裝並加載套件。
+# 3安裝並加載套件。
 
-* 用下方的code來安裝第三方套件，如果你已經安裝過`tidyverse`，這兩個`httr`和`jsonlie`都有被`tidyverse`套件集合收錄，就不需要另行安裝，只需要加載之。
-
-```
+```{r}
 pkgs <- c("jsonlite", "httr")
 pkgs <- pkgs[!(pkgs %in% installed.packages()[,"Package"])]
 if(length(pkgs)) install.packages(pkgs)
 ```
 
+* 上方的code來安裝第三方套件，如果你已經安裝過`tidyverse`，這兩個`httr`和`jsonlie`都有被`tidyverse`套件集合收錄，就不需要另行安裝，只需要加載之。
+
+
+
 ```{r}
 library(httr)
 library(jsonlite)
 options(stringsAsFactors = F)
+
+
+a <- rnorm(1000, 1, 100)
+?rnorm
+sd(a)
+mean(a)
+abs(a - mean(a)) > 2*sd(a)
+a[abs(a - mean(a)) > 2*sd(a)]
+x.b <- c("a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k")
+x.b[(1:length(x.b)) %% 2 == 1]
 ```
 
 
-# Case: 1 Air-Quality
+# Case: 1 Get flu
+
+```{r}
+url_sc_flu <- "https://od.cdc.gov.tw/eic/Weekly_Age_County_Gender_487a.json"
+# url_AQI <- "http://opendata.epa.gov.tw/ws/Data/REWIQA/?$orderby=SiteName&$skip=0&$top=1000&format=json"
+df <- fromJSON(content(GET(url_sc_flu), "text", encoding = "utf-8"))
+str(df)
+```
 
 * `fromJSON(content(GET(url), "text", encoding = "utf-8"))`由內到外有三個函式。
 
@@ -289,12 +308,7 @@ options(stringsAsFactors = F)
 * `jsonlite::fromJSON()` 因為我們用眼睛看就知道他是個JSON格式的檔案，所以用`fromJSON()`這個函式，把用JSON格式編成的字串轉為R的物件，有可能是`data.frame`或`list`。`fromJSON()`預期會把JSON中`[]`的每一個項目轉為一筆筆的資料，然後把`{}`的pair當成column的變數名稱
 
 
-```{r}
-url <- "http://opendata.epa.gov.tw/ws/Data/REWIQA/?$orderby=SiteName&$skip=0&$top=1000&format=json"
 
-df <- fromJSON(content(GET(url), "text", encoding = "utf-8"))
-str(df)
-```
 
 ## GET() 發送請求
 
@@ -338,8 +352,8 @@ df <- fromJSON(text)
 * 下列這些網路文件應該都是json檔，嘗試把他抓回來看看。
 
 ```{r}
+url_AQX <- "https://taqm.epa.gov.tw/taqm/aqs.ashx?lang=tw&act=aqi-epa&ts=1538961147679"
 url_rent591 <- "https://rent.591.com.tw/home/search/rsList?is_new_list=1&type=1&kind=2&searchtype=1&region=1"
-url_reHospital <- "http://data.nhi.gov.tw/Datasets/DatasetResource.ashx?rId=A21030000I-E30008-002&ndctype=JSON&ndcnid=18585"
 url_dcard <- "https://www.dcard.tw/_api/forums/girl/posts?popular=true"
 url_pchome <- "http://ecshweb.pchome.com.tw/search/v3.3/all/results?q=X100F&page=1&sort=rnk/dc"
 url_104 <- "https://www.104.com.tw/jobs/search/list?ro=0&keyword=%E8%B3%87%E6%96%99%E5%88%86%E6%9E%90&area=6001001000&order=1&asc=0&kwop=7&page=2&mode=s&jobsource=n104bank1"

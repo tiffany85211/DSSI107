@@ -92,8 +92,8 @@ res <- fromJSON(content(GET(url), "text"))
 
 ```{r}
 url1 <- "https://rent.591.com.tw/home/search/rsList?is_new_list=1&type=1&kind=2&searchtype=1&region=1"
-res1 <- fromJSON(content(GET(url1), "text"))
-all.df <- res1$data$data
+res <- fromJSON(content(GET(url1), "text"))
+all.df <- res$data$data
 ```
 
 
