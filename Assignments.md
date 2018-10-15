@@ -24,3 +24,9 @@ x.b <- c("a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k")
 # 2.1 Get only elements at odd positions and assign to x.b1
 # 2.2 Truncate the first 2 elements and the last 2 elements and assign to x.b2
 ```
+
+# Assignment #3
+
+# Assignment #4
+* **GET** at least one page of data from 104, pchome search, 鉅亨網, or 信義房屋. **Retrieve** data into data.frame and save them to .rda or .rds.
+* **Try** to find similar websites which use json as reponses, at least one. 
