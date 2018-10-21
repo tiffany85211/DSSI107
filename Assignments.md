@@ -44,3 +44,10 @@ x.b1 <- x.b[(1:length(x.b)) %% 2 == 1]
  * url_104 <- "https://www.104.com.tw/jobs/search/?ro=0&keyword=%E8%B3%87%E6%96%99%E5%88%86%E6%9E%90&area=6001001000&order=1&asc=0&kwop=7&page=9&mode=s&jobsource=n104bank1"
  * url_cnyes <- "https://news.cnyes.com/api/v3/search?q=%E9%B4%BB%E6%B5%B7"
 * Try to find at least one website whose webpage is rendered from json files.
+
+# Assignment #5 Scraping news report
+* Try to scrape and parse one news website (必須要是非得剖析背後的html不可的網站，例如鉅亨網背後是json，那就沒必要用html)
+ * e.g., ltn.news, apple news, udn news, ...
+* with one query to get at least 100 news reports
+* Store your data as .rds or .rda
+* Zip your data, .rmd, .html file into a zipped file, then upload
