@@ -46,8 +46,8 @@ if(length(pkgs)) install.packages(pkgs)
 ```{r load packages, message=FALSE, warning=FALSE}
 library(tidyverse)
 library(rvest)
-library(httr)
-library(dplyr) 
+# library(httr)
+# library(dplyr) 
 options(stringsAsFactors = F)
 ```
 
@@ -138,7 +138,7 @@ css <- "div.r-ent div.title a"
 node.a <- html_nodes(doc, css)
 links <- html_attr(node.a, "href")
 class(links) # character
-length(links)
+links
 ```
 
 
@@ -147,6 +147,7 @@ length(links)
 ```{r}
 pre <- "https://www.ptt.cc"
 links <- paste0(pre, links)
+links
 ```
 
 
@@ -203,11 +204,12 @@ length(all_links)
 ```{r}
 link <- all_links[1]
 doc <- read_html(link)
-meta.css <- "#main-content > div.article-metaline > span.article-meta-value"
+meta.css <- "div.article-metaline span.article-meta-value"
 metadata <- html_text(html_nodes(doc, meta.css))
     
-post.xpath <- '//*[@id="main-content"]/text()'
+post.xpath <- '//*[@id="main-content"]/text()' # text() to retrieve untagged text part only
 post.paragraph <- html_text(html_nodes(doc, xpath = post.xpath))
+print(length(post.paragraph))
 post <- paste(post.paragraph, collapse = "")
 post.df <- data.frame(post, 
                       uid = metadata[1],
@@ -223,7 +225,7 @@ post.df <- data.frame(post,
 for(link in all_links[2:10]){
     print(link)
     doc <- read_html(link)
-    meta.css <- "#main-content > div.article-metaline > span.article-meta-value"
+    meta.css <- "div.article-metaline span.article-meta-value"
     metadata <- html_text(html_nodes(doc, meta.css))
     
     post.xpath <- '//*[@id="main-content"]/text()'
