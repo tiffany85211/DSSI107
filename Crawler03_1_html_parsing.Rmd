@@ -44,6 +44,7 @@ if(length(pkgs)) install.packages(pkgs)
 * 這邊加載`dplyr`套件是為了用`bind_rows()`將過程中所抓取的資料進行合併。
 
 ```{r load packages, message=FALSE, warning=FALSE}
+library(tidyverse)
 library(rvest)
 library(httr)
 library(dplyr) 
@@ -92,17 +93,21 @@ browseURL(url)
 
 ```{r}
 css <- "#main-container > div.r-list-container.action-bar-margin.bbs-screen > div > div.title > a"
+css <- "div.r-ent div.title a"
 node.a <- html_nodes(doc, css)
 class(node.a) # "xml_nodeset"
 length(node.a)
 ```
 
 ### 2.2. (options) 用**xpath**抽取
+* xpath cheatsheet https://devhints.io/xpath
 
-```
-path <- '//*[@id="main-container"]/div[2]//div/div[3]/a'
+```{r}
+path <- '//*[@id="main-container"]//div[contains(@class, "title")]/a'
 node.a <- html_nodes(doc, xpath = path)
+length(node.a)
 links <- html_attr(node.a, "href")
+length(links)
 ```
 
 
@@ -129,11 +134,13 @@ length(texts)
 ```{r}
 url <- "https://www.ptt.cc/bbs/Boy-Girl/index.html"
 doc   <- read_html(url) # Get and parse the url
-css <- "#main-container > div.r-list-container.action-bar-margin.bbs-screen > div > div.title > a"
+css <- "div.r-ent div.title a"
 node.a <- html_nodes(doc, css)
 links <- html_attr(node.a, "href")
 class(links) # character
+length(links)
 ```
+
 
 * 除此之外，由於超鏈結少了前面那一段`https://www.ptt.cc`，因此要用`paste0()`自行補上。
 
@@ -141,6 +148,18 @@ class(links) # character
 pre <- "https://www.ptt.cc"
 links <- paste0(pre, links)
 ```
+
+
+* using pipeline notation
+```{r}
+links <- read_html(url) %>%
+    html_nodes("div.r-ent div.title a") %>%
+    html_attr("href") %>%
+    paste0("https://www.ptt.cc", .)
+browseURL(links[1])
+```
+
+
 
 ## 4.用for-loop打撈多頁的超鏈結並合併
 
@@ -160,17 +179,13 @@ pre <- "https://www.ptt.cc"
 # doc   <- read_html(url) # Get and parse the url
 all_links <- c()
 for(p in 3893:3903){
-	
 	url <- sprintf("https://www.ptt.cc/bbs/Boy-Girl/index%s.html", p)
-	url
-	doc   <- read_html(url) # Get and parse the url
-	css <- "#main-container > div.r-list-container.action-bar-margin.bbs-screen > div > div.title > a"
-	node.a <- html_nodes(doc, css)
-	links <- html_attr(node.a, "href")
-	links <- paste0(pre, links) # Recover links
-	
+    links <- read_html(url) %>%
+        html_nodes("div.r-ent div.title a") %>%
+        html_attr("href") %>%
+        paste0("https://www.ptt.cc", .)
 	all_links <- c(all_links, links)
-	print(p)
+	print(url)
 }
 length(all_links)
 ```
@@ -198,8 +213,7 @@ post.df <- data.frame(post,
                       uid = metadata[1],
                       title = metadata[2],
                       timestamp = metadata[3],
-                      url = link
-                          )
+                      url = link)
 ```
 
 ## 2. Get all posts by links
