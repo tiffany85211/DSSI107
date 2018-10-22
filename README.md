@@ -19,6 +19,7 @@
 
 
 # Announcement
+* [A FB page for sharing interesting data science projects to you](https://www.facebook.com/p4css/)
 * **HOT! [Open data conference](https://github.com/P4CSS/p4css.github.io/blob/master/img/competition.jpg) for you (Due: 11/30)**
 
 * 因為老師習慣照課程進行更新程式碼或講義，所以**每週上課前務必重新下載或clone本repository**。
