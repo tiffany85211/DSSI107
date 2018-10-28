@@ -51,3 +51,6 @@ x.b1 <- x.b[(1:length(x.b)) %% 2 == 1]
 * with one query to get at least 100 news reports
 * Store your data as .rds or .rda
 * Zip your data, .rmd, .html file into a zipped file, then upload
+
+# Assignment #6 Challenge
+* Try to implement the following posts [Who wrote the anti-Trump New York Times op-ed? Using tidytext to find document similarity](http://varianceexplained.org/r/op-ed-text-analysis/)
