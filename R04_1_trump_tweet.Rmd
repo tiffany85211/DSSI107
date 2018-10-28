@@ -1,0 +1,302 @@
+---
+title: "R04_1_trump_tweet_base"
+output: 
+  html_document: 
+    number_sections: true
+    highlight: textmate
+    theme: spacelab
+    toc: yes
+editor_options: 
+  chunk_output_type: inline
+---
+
+
+```{r}
+library(tidyverse)
+library(dplyr)
+library(ggplot2)
+load(url("http://varianceexplained.org/files/trump_tweets_df.rda"))
+dim(trump_tweets_df)
+names(trump_tweets_df)
+tweets <- trump_tweets_df
+```
+
+
+# 1. Data conversion
+
+## Select id, source, text, and created_at columns 
+```{r}
+tweets <- tweets[c("id", "source", "text", "created_at")]
+```
+
+## Extract device by detecting Twitter for iPhone/Android using re
+```{r}
+tweets$source <- sub(".*Twitter for (.*?)<.*", "\\1", tweets$source)
+```
+
+## Select source columns are "iPhone" or "Android"
+```{r}
+tweets <- tweets[tweets$source %in% c("iPhone", "Android"), ]
+```
+
+
+# Converting time format
+```{r}
+# windows users
+# if your locales is TW, there are no abbriviate weekday or abbriviate month.
+# So, you must transfer to English
+
+sessionInfo()
+
+Sys.setlocale("LC_TIME", "C") #sounds be safer
+
+# Set LC_TIME from TW to English
+Sys.setlocale("LC_TIME", "English")
+
+# Convert time str to time POXISlt time object
+tweets$created_at <- strptime(tweets$created_at, "%a %b %d %H:%M:%S %z %Y")
+class(tweets$created_at) # POSIXlt
+
+# Convert  POXISlt to POSIXct for further computation
+tweets$created_at <- as.POSIXct(tweets$created_at)
+class(tweets$created_at) #POSIXct
+
+# First, there are two internal implementations of date/time: POSIXct, which stores seconds since UNIX epoch (+some other data), and POSIXlt, which stores a list of day, month, year, hour, minute, second, etc.
+# strptime is a function to directly convert character vectors (of a variety of formats) to POSIXlt format.
+# as.POSIXlt converts a variety of data types to POSIXlt. It tries to be intelligent and do the sensible thing - in the case of character, it acts as a wrapper to strptime.
+# http://stackoverflow.com/questions/10699511/difference-between-as-posixct-as-posixlt-and-strptime-for-converting-character-v
+
+# Create hour variable(column)
+tweets$hour <- format(tweets$created_at, "%H")
+class(tweets$hour) # [1] "character"
+tweets$hour <- as.integer((tweets$hour))
+dim(tweets) # [1] 17307     5
+
+```
+
+```{r}
+
+# Count tweets by source (iPhone or Android?) and hour
+# Add a new variable "percent" equals to n/sum(n) by device group
+phone_count <- tweets %>%
+	count(source, hour) %>%
+	mutate(percent = n/sum(n))
+class(phone_count)
+# [1] "grouped_df" "tbl_df"     "tbl"        "data.frame"
+
+```
+
+```{r}
+
+# Plotting by ggplot2 -----------------------------------------------------
+library(scales) # for displaying percentage by percent_format()
+library(ggplot2)
+
+# Absolute ratio version 
+
+# Create percentage variable for phone_count
+phone_count$percent <- phone_count$n / sum(phone_count$n)
+class(phone_count)
+class(phone_count$source)
+
+# Plotting testing
+# df <- data.frame(a=as.character(c(rep(1, 5), rep(2, 5), rep(3, 5))), 
+# 	b=21:35, 
+# 	c=c(1:5, 1:5, 1:5))
+# df %>%
+# 	ggplot(aes(b, c, color=a)) + 
+# 	geom_line() + 
+# 	scale_y_continuous(labels = percent_format()) +
+# 	labs(x = "Hour of day (EST)",
+# 		y = "% of tweets",
+# 		color = "")
+
+ggplot(phone_count, aes(hour, percent, color = source)) +
+	geom_line()
+
+ggplot(phone_count, aes(hour, percent, color = source)) +
+	geom_line() +
+	scale_y_continuous(labels = scales::percent_format()) + 
+	labs(x = "Hour of day (EST)",
+	y = "% of tweets",
+	color = "")
+
+```
+
+```{r}
+
+# Related ratio
+phone_count %>%
+	ggplot() + 
+	aes(hour, percent, color = source) +
+	geom_line() +
+	scale_y_continuous(labels = scales::percent_format()) +
+	labs(x = "Hour of day (EST)",
+		y = "% of tweets",
+		color = "")
+
+
+```
+
+```{r}
+
+# With Pictures or Not ----------------------------------------------------
+library(stringr)
+
+# Filter out those text contains leading "
+filtered <- tweets[!grepl('^"', tweets$text), ]
+
+# Detect "t.co" in text and label as "Pic" or "No pic"
+filtered$picture <- ifelse(grepl("t.co", filtered$text), "Pic", "No pic")
+
+# count by source and picture
+pic_count <- count(filtered, source, picture)
+
+grepl('^"', tweets$text) # regex '^"' means starting with "
+tweets$text[1]
+tweets$text[7]
+
+grepl("t.co", filtered$text)
+
+
+ggplot(pic_count,
+	aes(source, n, fill = picture)) +
+	geom_bar(stat = "identity")
+
+ggplot(pic_count,
+	aes(source, n, fill = picture)) +
+	geom_bar(stat = "identity", position = "dodge")
+
+ggplot(pic_count,
+	aes(source, n, fill = picture)) +
+	geom_bar(stat = "identity", position = "dodge") +
+	labs(x = "", y = "Number of tweets", fill = "")
+
+
+
+
+```
+
+```{r}
+
+# Comparison of words -----------------------------------------------------
+
+library(tidytext)
+
+# https://paper.dropbox.com/doc/R-Regular-Expression-3NkrcMaeMkKH4A5wiiOJz
+# | -> OR
+# \\d -> digital number
+# ^ -> Begin of the string
+
+# replacing http://t.co/...
+filtered$text <- gsub("https://t.co/[A-Za-z\\d]+|&amp;", "", filtered$text)
+
+# splitting text by space
+filtered$word <- strsplit(filtered$text, "\\s")
+
+# splitting text by non-a-ZA-Z and '
+filtered$word <- strsplit(filtered$text, "[^a-zA-Z']+")
+
+# unnested character vector
+unnested <- unnest(filtered, word)
+# tidytext::stop_words$word
+library(tm)
+
+# filtering stopwords
+unnested <- unnested[!unnested$word %in% stopwords("en"), ] #8????
+
+# detected if only a-z
+unnested <- unnested[grepl("[a-z]", unnested$word), ] #77568
+
+# testing <- gsub("https://t.co/[A-Za-z\\d]+|&amp;", "", filtered$text)
+# sum(grepl("https://t.co/[A-Za-z\\d]+", testing))
+
+
+word_count <- count(unnested, word, sort = TRUE)
+word_count_plot <- word_count[1:20, ]
+word_count_plot$word <- with(word_count_plot, reorder(word, n))
+
+
+ggplot(word_count_plot, aes(word, n)) + 
+	geom_bar(stat = "identity")
+
+ggplot(word_count_plot, aes(word, n)) + 
+	geom_bar(stat = "identity") + 
+	coord_flip()
+
+
+
+reg <- "[^A-Za-z']"
+# reg <- "([^A-Za-z\\d#@']|'(?![A-Za-z\\d#@]))"
+
+test2 <- tweets %>%
+	filter(str_detect(text, '^"'))
+test <- tweets %>%
+	filter(!str_detect(text, '^"')) %>%
+	mutate(text = str_replace_all(text, "https://t.co/[A-Za-z\\d]+|&amp;", ""))
+
+test$text[1]
+tweet_words <- tweets %>%
+	filter(!str_detect(text, '^"')) %>%
+	mutate(text = str_replace_all(text, "https://t.co/[A-Za-z\\d]+|&amp;", "")) %>%
+	unnest_tokens(word, text, token = "regex", pattern = reg) %>%
+	filter(!word %in% stop_words$word,
+		str_detect(word, "[a-z]"))
+
+tweet_words %>%
+	count(word, sort = TRUE) %>%
+	head(20) %>%
+	mutate(word = reorder(word, n)) %>%
+	ggplot(aes(word, n)) +
+	geom_bar(stat = "identity") +
+	ylab("Occurrences") +
+	coord_flip()
+
+
+```
+
+```{r}
+
+# words frequency by different devices ------------------------------------
+
+source_count <- count(tweet_words, word, source)
+source_count <- source_count[sum(source_count$n) >= 5, ]
+spread_source <- spread(source_count, source, n, fill = 0)
+spread_source <- ungroup(spread_source)
+
+spread_source$Android <- (spread_source$Android + 1)/(sum(spread_source$Android)+1)
+spread_source$iPhone <- (spread_source$iPhone + 1)/(sum(spread_source$iPhone)+1)
+spread_source$logratio <- log2(spread_source$Android/spread_source$iPhone)
+spread_source <- spread_source[order(-spread_source$logratio), ]
+
+
+toplot <- spread_source %>%
+	group_by(logratio > 0) %>%
+	top_n(15, abs(logratio)) %>%
+	ungroup() %>%
+	mutate(word = reorder(word, logratio))
+
+ggplot(toplot, aes(word, logratio, fill = logratio < 0)) +
+	geom_bar(stat = "identity") +
+	coord_flip() + 
+	ylab("Android / iPhone log ratio") +
+	scale_fill_manual(name = "", labels = c("Android", "iPhone"),
+		values = c("red", "lightblue"))
+
+	
+
+
+spread_source %>%
+	group_by(logratio > 0) %>%
+	top_n(15, abs(logratio)) %>%
+	ungroup() %>%
+	mutate(word = reorder(word, logratio)) %>%
+	ggplot(aes(word, logratio, fill = logratio < 0)) +
+	geom_bar(stat = "identity") +
+	coord_flip() +
+	ylab("Android / iPhone log ratio") +
+	scale_fill_manual(name = "", labels = c("Android", "iPhone"),
+		values = c("red", "lightblue"))
+
+```
+
