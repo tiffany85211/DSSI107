@@ -52,5 +52,7 @@ x.b1 <- x.b[(1:length(x.b)) %% 2 == 1]
 * Store your data as .rds or .rda
 * Zip your data, .rmd, .html file into a zipped file, then upload
 
-# Assignment #6 Challenge
-* Try to implement the following posts [Who wrote the anti-Trump New York Times op-ed? Using tidytext to find document similarity](http://varianceexplained.org/r/op-ed-text-analysis/)
+# Assignment #6 text analysis basic using dplyr, tidytext, and ggplot2
+* Try to analyze typhoon disaster news data in Chinese 
+* (options) Try to implement the following posts [Who wrote the anti-Trump New York Times op-ed? Using tidytext to find document similarity](http://varianceexplained.org/r/op-ed-text-analysis/)
+* (options) Scrape ptt posts and comments and try to do some analysis.
