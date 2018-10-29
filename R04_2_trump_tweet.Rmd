@@ -12,13 +12,14 @@ editor_options:
 
 # Source
 * Author: The case is written by David Robinson, author of the book "R for text mining", author of library tidytext, data scientist at StackOverFlow.
-* Link of github: https://github.com/dgrtwo/dgrtwo.github.com/blob/master/_R/2016-08-09-trump-tweets.Rmd
 * Link of the article: http://varianceexplained.org/r/trump-tweets/
+* Link of github: https://github.com/dgrtwo/dgrtwo.github.com/blob/master/_R/2016-08-09-trump-tweets.Rmd
 
 
 # 1. Load and clean data
 
 ```{r}
+
 library(dplyr)
 library(ggplot2)
 load(url("http://varianceexplained.org/files/trump_tweets_df.rda"))
@@ -32,40 +33,39 @@ names(trump_tweets_df)
 
 # 2. Cleaning data
 ```{r}
-library(tidyr) # tidyr::extract()
-library(stringr) # stringr::str_replace
-tweets <- trump_tweets_df %>%
-	dplyr::select(id, statusSource, text, created) %>%
-	mutate(source = str_replace(statusSource, ".*Twitter for (.*?)<.*", "\\1"))
-tweets$statusSource[1]
+library(tidyr) # for tidyr::extract()
+library(stringr) # for stringr::str_replace
 
 tweets <- trump_tweets_df %>%
-	dplyr::select(id, statusSource, text, created) %>%
+	select(id, statusSource, text, created) %>%
 	mutate(source = str_replace(statusSource, ".*Twitter for (.*?)<.*", "\\1")) %>%
   	# extract(statusSource, "source", "Twitter for (.*?)<") %>%
   	filter(source %in% c("iPhone", "Android"))
 
 # Using stringr::str_replace() to mutate a new source variable, replacing tidyr::
-
+# tweets$statusSource[1:10]
+# tweets$source[1:10]
 # str(tweets)
 ```
 
 
 # 3. Analyzing data
 ```{r}
-library(lubridate)
+library(lubridate) # lubridate::hour, ::with_tz
 library(scales)
 
 tweets %>%
-  count(source, hour = hour(with_tz(created, "EST"))) %>%
-  mutate(percent = n / sum(n)) %>%
-  ggplot() +
-  aes(hour, percent, color = source) +
-  geom_line() +
-  scale_y_continuous(labels = percent_format()) +
-  labs(x = "Hour of day (EST)",
-       y = "% of tweets",
-       color = "")
+    count(source, hour = hour(with_tz(created, "EST"))) %>%
+    # group_by(source) %>%
+    mutate(percent = n / sum(n)) %>% 
+    # ungroup() %>%
+    ggplot() +
+    aes(hour, percent, color = source) +
+    geom_line() +
+    scale_y_continuous(labels = percent_format()) +
+    labs(x = "Hour of day (EST)",
+         y = "% of tweets",
+         color = "")
 ```
 
 
@@ -78,14 +78,15 @@ tweets %>%
                          "Picture/link", "No picture/link")) %>%
   count(source, picture) %>%
 	ggplot() + 
-	aes(source, n, fill = picture) + 
-	geom_col(position="dodge")
-	
+	aes(source, n, fill = picture) +  # two variables: using geom_col()
+	geom_col(position="dodge") +
+    # geom_col(position="stack") + 
+    labs(x = "", y = "Number of tweets", fill = "")
+
+?geom_col
 
 
-# ggplot(tweet_picture_counts, aes(source, n, fill = picture)) +
-#   geom_bar(stat = "identity", position = "dodge") +
-#   labs(x = "", y = "Number of tweets", fill = "")
+
 ```
 
 
