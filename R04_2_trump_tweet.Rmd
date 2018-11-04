@@ -19,13 +19,13 @@ editor_options:
 # 1. Load and clean data
 
 ```{r}
-
-library(dplyr)
-library(ggplot2)
+library(tidyverse)
+# library(dplyr)
+# library(ggplot2)
 load(url("http://varianceexplained.org/files/trump_tweets_df.rda"))
+
 dim(trump_tweets_df)
 names(trump_tweets_df)
-
 ```
 
 
@@ -56,9 +56,9 @@ library(scales)
 
 tweets %>%
     count(source, hour = hour(with_tz(created, "EST"))) %>%
-    # group_by(source) %>%
+    group_by(source) %>%
     mutate(percent = n / sum(n)) %>% 
-    # ungroup() %>%
+    ungroup() %>%
     ggplot() +
     aes(hour, percent, color = source) +
     geom_line() +
@@ -70,6 +70,7 @@ tweets %>%
 
 
 # 4. With Pictures or Not
+* `geom_col()` bar chart for two variables
 ```{r}
 library(stringr)
 tweets %>%
@@ -78,14 +79,13 @@ tweets %>%
                          "Picture/link", "No picture/link")) %>%
   count(source, picture) %>%
 	ggplot() + 
-	aes(source, n, fill = picture) +  # two variables: using geom_col()
+	aes(source, n, fill = picture) + 
 	geom_col(position="dodge") +
     # geom_col(position="stack") + 
     labs(x = "", y = "Number of tweets", fill = "")
 
 ?geom_col
-
-
+?geom_bar
 
 ```
 
@@ -96,13 +96,7 @@ tweets %>%
 library(tidytext)	# unnest_tokens()
 library(stringr)	# str_detect(), str_replace_all()
 
-test <- tweets %>%
-  	filter(!str_detect(text, '^"')) %>%
-	mutate(text = str_replace_all(text, "https://t.co/[A-Za-z\\d]+|&amp;", "")) %>%
-	unnest_tokens(word, text, token = "regex", pattern = "[^A-Za-z\\d#@']")
-test$word <- tolower(test$word)
 # View(test)
-
 # stop_words$word
 
 tweet_words <- tweets %>%
@@ -110,8 +104,8 @@ tweet_words <- tweets %>%
   	mutate(text = str_replace_all(text, "https://t.co/[A-Za-z\\d]+|&amp;", "")) %>%
   	# unnest_tokens(word, text) %>%
 	unnest_tokens(word, text, token = "regex", pattern = "[^A-Za-z\\d#@']") %>%
-  	filter(!word %in% stop_words$word,
-  		   str_detect(word, "[a-z]"))
+  	filter(!word %in% stop_words$word) %>%
+    filter(str_detect(word, "[a-z]"))
 # View(tweet_words)
 ```
 
@@ -131,11 +125,6 @@ tweet_words %>%
 
 # 6. words frequency by different devices
 ```{r}
-test <- tweet_words %>%
-  count(word, source) %>%
-	filter(n >= 5) %>%
-	spread(source, n, fill = 0)
-# View(test)
 
 word_by_source <- tweet_words %>%
   count(word, source) %>%
@@ -143,12 +132,9 @@ word_by_source <- tweet_words %>%
   spread(source, n, fill = 0) %>%
   ungroup()
 
-sum(word_by_source$iPhone)
-sum(word_by_source$Android)
-
 android_iphone_ratios <- word_by_source %>%
-	mutate(iPhone = (iPhone+1)/sum(iPhone+1)) %>%
-	mutate(Android = (Android+1)/sum(Android+1)) %>%
+	mutate(iPhone = (iPhone+1)/(sum(iPhone)+1)) %>%
+	mutate(Android = (Android+1)/(sum(Android)+1)) %>%
 	# mutate_at(.cols = vars(iPhone, Android),
 			  # .funs = funs((. + 1) / sum(. + 1))) %>%
   	mutate(logratio = log2(Android / iPhone)) %>%
@@ -157,13 +143,6 @@ android_iphone_ratios <- word_by_source %>%
 
 ## 6.1 visualizing ratio
 ```{r}
-android_iphone_ratios %>%
-	mutate(word = reorder(word, logratio)) %>%
-	ggplot() + 
-	aes(word, logratio, fill=logratio < 0) + 
-	geom_col() + 
-	coord_flip()
-
 
 android_iphone_ratios %>%
   group_by(logratio > 0) %>%

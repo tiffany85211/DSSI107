@@ -20,6 +20,7 @@ editor_options:
 4. 處理時間時要用到lubridate。
 
 ```{r}
+# install.packages("jiebaR")
 library(tidyverse)
 library(stringr)
 library(tidytext)
@@ -35,6 +36,9 @@ library(lubridate)
 ```{r}
 news.df <- readRDS("data/typhoon.rds") %>%
     mutate(doc_id = row_number())
+dim(news.df)
+names(news.df)
+count(news.df, cat)
 ```
 
 
@@ -64,45 +68,69 @@ tokenized.df <- news.df %>%
     mutate(word = purrr::map(text, function(x)segment(x, cutter)))
 
 unnested.df <- tokenized.df %>%
-    select(doc_id, text, word) %>%
-    unnest(word) %>%
-    filter(!(word %in% stopWords$word)) %>%
-    filter(!str_detect(word, "[a-zA-Z0-9]+"))
+    # select(doc_id, text, word) %>%
+    unnest(word)
 ```
 
 
 ## Word frequency distribution
 
+## Original bar chart
 ```{r}
-word.count <- tokenized.df %>%
-    unnest(word) %>%
+unnested.df %>%
+    count(word, sort=T) %>%
+    mutate(word = reorder(word, n)) %>%
+    slice(1:30) %>%
+    ggplot() + aes(word, n)+
+    geom_col() + 
+    coord_flip() + 
+    theme(axis.text.y=element_text(family="Heiti TC Light"))
+
+```
+
+## Filtering out stop words
+```{r}
+unnested.df %>%
     count(word, sort=T) %>%
     filter(!(word %in% stopWords$word)) %>%
-    filter(nchar(word) > 1) %>%
     filter(!str_detect(word, "[a-zA-Z0-9]+")) %>%
-    filter(n > 3)
+    filter(nchar(word) > 1) %>%
+    filter(n > 3) %>%
+    mutate(word = reorder(word, n)) %>%
+    slice(1:30) %>%
+    ggplot() + aes(word, n)+
+    geom_col() + 
+    coord_flip() + 
+    theme(axis.text.y=element_text(family="Heiti TC Light"))
+```
 
 
-word.count %>%
+
+# Verifying zip'f law
+```{r}
+unnested.df %>%
+    count(word, sort=T) %>%
     count(n, sort=T) %>%
     ggplot(aes(n, nn)) + 
     geom_point(alpha=0.5, size = 1, color="#333333")
 
-word.count %>%
+unnested.df %>%
+    count(word, sort=T) %>%
     count(n, sort=T) %>%
     ggplot(aes(n, nn)) + 
     geom_point(alpha=0.5, size = 1, color="#333333")  + 
     scale_x_log10() + 
     scale_y_log10()
+
 ```
+
+
 
 # logratio: 早、近期用字差異
 
 ```{r}
-cat_word.tf <- tokenized.df %>%
-    unnest(word) %>%
+cat_word.tf <- unnested.df %>%
     count(cat, word) %>%
-    ungroup() %>%
     filter(!str_detect(word, "[a-zA-Z0-9]+")) %>%
 	filter(!(word %in% stopWords$word)) %>%
     filter(nchar(word)>1)
