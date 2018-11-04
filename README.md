@@ -52,17 +52,17 @@
 
 ## W8: 10/29
 * [(Option) SlideR05. ggplot](https://docs.google.com/presentation/d/e/2PACX-1vR0MIoaDm9YaEvop3wYAYHnr5O-kCPtK2AlS9QR8zpgeoCBQCfJ39q55VrK4RvM_UJg18JDQa1I_pgJ/pub?start=false&loop=false&delayms=3000)
-* [SlideTM06. dplyr_trump's tweet](https://docs.google.com/presentation/d/e/2PACX-1vRNLWSWiTePNA5tmAhFcbkFWEzfa0LFiG0FENhalVpxz2lG2Z1lZ8pJHacaKHWpnC1SYhR-qxQOnKb7/pub?start=false&loop=false&delayms=3000): [R04_2_trump_tweet.Rmd](R04_2_trump_tweet.Rmd)
+* [SlideTM06. dplyr_trump's tweet](https://docs.google.com/presentation/d/e/2PACX-1vRNLWSWiTePNA5tmAhFcbkFWEzfa0LFiG0FENhalVpxz2lG2Z1lZ8pJHacaKHWpnC1SYhR-qxQOnKb7/pub?start=false&loop=false&delayms=3000): Code [R04_2_trump_tweet.Rmd](R04_2_trump_tweet.Rmd)
 * [Assignment #6](Assignments.md#assignment-6-challenge) No later than **11/11 23:59**
 
 ## W9: 11/05
-* [SlideR06. Processing Chinese text](https://docs.google.com/presentation/d/1sdqhlHcFp-2L1Lt7c8NV1m-KX_2o-iSQykDpMlgWZrE/edit?usp=sharing): [TM01_demographic_typhoon.Rmd](TM01_demographic_typhoon.Rmd)
+* [SlideR06. Processing Chinese text](https://docs.google.com/presentation/d/1sdqhlHcFp-2L1Lt7c8NV1m-KX_2o-iSQykDpMlgWZrE/edit?usp=sharing): Code [TM01_demographic_typhoon.Rmd](TM01_demographic_typhoon.Rmd)
+* [SlideML08-1: PCA](https://docs.google.com/presentation/d/e/2PACX-1vRhbsGGw0xYHisqd9IxqiOJ7iDYic0WjipPEwlI3J8LkaBYokP20oyOlKiGE7lyXBCAhBnBL4harpmV/pub?start=false&loop=false&delayms=3000): Code 1 [R08_1_PCA_iris.Rmd](R08_1_PCA_iris.Rmd), Code 2 [R08_2_PCA_marraige_equality.Rmd](R08_2_PCA_marraige_equality.Rmd)
+
+## W10: 11/12
 * [SlideTM07. Topic modeling](https://docs.google.com/presentation/d/e/2PACX-1vRTSSO_8JuLTK_1OyM9eDrogA-K2fhXQwlKxh1PpRvNavkurCCcKBNftv9MpKGYM6EDXtNnqZvPDdKy/pub?start=false&loop=false&delayms=3000)
 * [SlideTM08: word2vec](https://docs.google.com/presentation/d/e/2PACX-1vSaDbagemtALMf0F5CJViNvLUI7U7cGJtelziV5IdKOridKI28DQ85sWWpVa1Y_1G3vH0bkKMAzW-XZ/pub?start=false&loop=false&delayms=3000)
 * [Assignment #7]() No later than **11/17 23:59**
-
-## W10: 11/12
-* [SlideML08-1: PCA](https://docs.google.com/presentation/d/e/2PACX-1vRhbsGGw0xYHisqd9IxqiOJ7iDYic0WjipPEwlI3J8LkaBYokP20oyOlKiGE7lyXBCAhBnBL4harpmV/pub?start=false&loop=false&delayms=3000)
 * [SlideML09: SVM](https://docs.google.com/presentation/d/e/2PACX-1vRVudHBYlfrtXZDu7zIdbde3_dB3gIXrl6S0lMSARfRfA__m0TPL-AmQvVMdEIE6BqU6dLgQWJ-QYwP/pub?start=false&loop=false&delayms=3000)
 
 
