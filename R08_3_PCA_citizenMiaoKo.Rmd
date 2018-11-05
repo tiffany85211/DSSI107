@@ -121,6 +121,18 @@ df2015.pca <- m2015.pca$x %>%
 	mutate(week=week(created_time))
 
 plot(df2015.pca[,c(1, 2, 13:17)])
+```
+
+```{r}
+df2015.pca %>%
+	ggplot(aes(PC1, PC2)) + 
+	geom_point(alpha = 0.5)
+
+```
+
+
+
+```{r}
 
 df2015.pca %>%
 	ggplot(aes(PC1, PC2, color=factor(type))) + 
@@ -134,7 +146,8 @@ df2015.pca %>%
 
 
 
-## conver to user scale
+
+## convert to user scale
 ```{r}
 m2015.pca$x
 like2pid.m <- as.matrix(like2pid2015[,-1])
