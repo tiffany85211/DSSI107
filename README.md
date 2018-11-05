@@ -57,7 +57,7 @@
 
 ## W9: 11/05
 * [SlideR06. Processing Chinese text](https://docs.google.com/presentation/d/1sdqhlHcFp-2L1Lt7c8NV1m-KX_2o-iSQykDpMlgWZrE/edit?usp=sharing): Code [TM01_demographic_typhoon.Rmd](TM01_demographic_typhoon.Rmd)
-* [SlideML08-1: PCA](https://docs.google.com/presentation/d/e/2PACX-1vRhbsGGw0xYHisqd9IxqiOJ7iDYic0WjipPEwlI3J8LkaBYokP20oyOlKiGE7lyXBCAhBnBL4harpmV/pub?start=false&loop=false&delayms=3000): Code 1 [R08_1_PCA_iris.Rmd](R08_1_PCA_iris.Rmd), Code 2 [R08_2_PCA_marraige_equality.Rmd](R08_2_PCA_marraige_equality.Rmd)
+* [SlideML08-1: PCA](https://docs.google.com/presentation/d/e/2PACX-1vRhbsGGw0xYHisqd9IxqiOJ7iDYic0WjipPEwlI3J8LkaBYokP20oyOlKiGE7lyXBCAhBnBL4harpmV/pub?start=false&loop=false&delayms=3000): Code 1 [R08_1_PCA_iris.Rmd](R08_1_PCA_iris.Rmd), Code 2 [R08_2_PCA_marraige_equality.Rmd](R08_2_PCA_marraige_equality.Rmd), **Code 3 [R08_3_PCA_citizenMiaoKo.Rmd](R08_3_PCA_citizenMiaoKo.Rmd)**
 
 ## W10: 11/12
 * [SlideTM07. Topic modeling](https://docs.google.com/presentation/d/e/2PACX-1vRTSSO_8JuLTK_1OyM9eDrogA-K2fhXQwlKxh1PpRvNavkurCCcKBNftv9MpKGYM6EDXtNnqZvPDdKy/pub?start=false&loop=false&delayms=3000)
