@@ -120,7 +120,6 @@ df2015.pca <- m2015.pca$x %>%
 	mutate(hour=hour(created_time)) %>%
 	mutate(week=week(created_time))
 
-
 plot(df2015.pca[,c(1, 2, 13:17)])
 
 df2015.pca %>%
