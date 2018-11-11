@@ -9,10 +9,15 @@ output: html_document
 ## 0. Install Packages
 
 
-```{r}
-pkgs <- c("jiebaR", "tidyverse", "stringr", "e1071", "tidyr", "Rtsne")
+```{r pre-install}
+pkgs <- c("jiebaR", "tidyverse", "tidytext", "stringr", "e1071", "tidyr", "Rtsne")
 pkgs <- pkgs[!pkgs %in% installed.packages()[,"Package"]]
 if(length(pkgs)) { install.packages(pkgs)}
+
+```
+
+
+```{r}
 library(tidyverse)
 library(stringr)
 options(stringsAsFactors = F)
@@ -52,7 +57,9 @@ unnested.df <- stock_news %>%
 ```
 
 
-* original dimension: 610 news x 12,936 words
+* original dimension: 
+> 610 news x 12,936 words
+
 ```{r}
 unnested.df %>%
     count(doc_id, word) %>%
@@ -107,35 +114,47 @@ comb.df <- unnested.df %>%
 
 
 ```{r}
+library(Rtsne) # cannot be installed in MacOS mojave
 
-library(Rtsne)
-
-
-# Hsieh's version
-feature <- comb.df %>% select(-doc_id, -status)
-
-
-# tsne to reduce dim to 2
-tsne <- Rtsne(feature, perplexity = 35, dims = 2, check_duplicates = F)
+tsne <- comb.df %>% select(-doc_id, -status) %>%
+    Rtsne(perplexity = 35, dims = 2, check_duplicates = F)
 
 # 取出降維後的特徵值df
 feature_tsne <- comb.df %>%
     select(doc_id, status) %>%
     mutate(status = as.factor(status)) %>%
-    bind_cols(as.data.frame(tsne$Y))
-
-
-save(feature_tsne, file = "feature_tsne.rds")
-
+    bind_cols(as.data.frame(tsne$Y)) %>%
+    mutate(id = row_number())
 ```
+
+# plotting tsne results
+
+```{r}
+feature_tsne %>%
+    ggplot() + aes(V1, V2, color = status) + 
+    geom_point()
+```
+
+
 
 
 # 7. SVM （support vector machine）
 
 ```{r}
+trainset <- feature_tsne %>% select(-doc_id)
+model <- svm(status ~ ., data = trainset)
 
-# 隨機構建訓練集與測試集
-# 60%資料為訓練集，其餘為測試集
+
+?svm
+# as.data.frame(model$SV) %>% 
+#     mutate(id = as.numeric(rownames(.))) %>%
+#     left_join(feature_tsne %>% select(doc_id, status, id)) %>%
+#     ggplot() + aes(V1, V2, color = status) + 
+#     geom_point()
+```
+
+# divide to tranining and testing set
+```{r}
 set.seed(2017)
 
 samples <- sample(1:nrow(feature_tsne), 
@@ -144,22 +163,24 @@ samples <- sample(1:nrow(feature_tsne),
 trainset <- feature_tsne %>% select(-doc_id) %>% slice(samples)
 testset <- feature_tsne[-samples,-1]
 
+```
 
+
+
+
+```{r}
 
 library(e1071)
-
-# 建立 SVM 分類器model，機器學習主體函式
-# labels~ 表示除去labels的資料，其他數據均進入機器學習中。 labels之資料作為分類標的。
-# kernel 表示svm之核函式，此次選用Radial
 model <- svm(status~ ., data = trainset, kernel="radial")
+plot(model, trainset, V1~V2)
 
-# 預測函式主體
 predicting  <- predict(model, testset %>% select(-status))
 
-# 對比統計預測與實際之差
+# creating confusion matrix
+# https://en.wikipedia.org/wiki/Confusion_matrix
 table(predicting, testset$status)
 
-# 計算預測準確率
+# accuracy
 pre <- predicting == testset$status
 percent1 <- length(pre[pre == T]) / length(pre)
 percent1
