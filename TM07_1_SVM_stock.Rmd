@@ -1,0 +1,166 @@
+---
+title: "SVM & Stock Price Prediction"
+author: "ZHAODONG WANG"
+date: "2018-01-05"
+output: html_document
+---
+
+
+## 0. Install Packages
+
+
+```{r}
+pkgs <- c("jiebaR", "tidyverse", "stringr", "e1071", "tidyr", "Rtsne")
+pkgs <- pkgs[!pkgs %in% installed.packages()[,"Package"]]
+if(length(pkgs)) { install.packages(pkgs)}
+library(tidyverse)
+library(stringr)
+options(stringsAsFactors = F)
+```
+
+# Loading data
+```{r}
+load("data/stock_news.RData")
+stock_news %>% names
+```
+
+
+```{r jeibaR and stop word}
+library(jiebaR)
+segment_not <- c("鴻海" ,  "永豐金", "中信金", "台積電", "聯發科" ,"兆豐金", "台指期","郭台銘","張忠謀","鉅亨網")
+cutter <- worker()
+new_user_word(cutter,segment_not)
+stopWords <- readRDS("data/stopWords.rds")
+```
+
+
+
+
+# Stopwords
+
+
+```{r}
+
+unnested.df <- stock_news %>%
+    select(doc_id = newsId, text = content, status = status_p) %>%
+    mutate(word = purrr::map(text, function(x)segment(x, cutter))) %>%
+    unnest(word) %>%
+    filter(!is.na(word)) %>% 
+    filter(!word %in% stopWords$word) %>%
+    filter(!str_detect(word, "[a-zA-Z0-9]+")) %>%
+    filter(nchar(word) > 1)
+```
+
+
+* original dimension: 610 news x 12,936 words
+```{r}
+unnested.df %>%
+    count(doc_id, word) %>%
+    spread(word, n, fill = 0) %>%
+    dim
+```
+
+
+
+# 4. Chi-square feature selection
+
+```{r}
+chi_df <- unnested.df %>%
+    count(word, status) %>%
+    filter(n > 3) %>%
+    spread(status, n, fill = 0) %>%
+    rename(A=`1`, C=`0`) %>%
+    mutate(B=sum(A)-A,
+           D=sum(C)-C,
+           N=A+B+C+D, 
+           chi2 = (A*D - B*C)^2 * N / ((A+C)*(A+B)*(B+D)*(C+D))) %>%
+    filter(chi2 > 6.64)
+```
+
+
+
+
+
+# 5. TF-IDF（term frequency & inverse document frequency）
+
+```{r}
+library(tidytext)
+# install.packages("tidytext")
+# dtm <- cast_dtm(word_token, title, words, n)
+# ??cast_dtm
+
+comb.df <- unnested.df %>%
+  left_join(chi_df) %>%
+  filter(!is.na(chi2)) %>%
+  count(doc_id, word) %>%
+  bind_tf_idf(word, doc_id, n) %>%
+  select(doc_id, word, tf_idf) %>%
+  spread(word, tf_idf, fill=0) %>%
+  left_join(select(stock_news, doc_id = newsId, status = status_p)) %>%
+    select(doc_id, status, everything())
+```
+
+
+
+
+# 6. T-SNE
+
+
+```{r}
+
+library(Rtsne)
+
+
+# Hsieh's version
+feature <- comb.df %>% select(-doc_id, -status)
+
+
+# tsne to reduce dim to 2
+tsne <- Rtsne(feature, perplexity = 35, dims = 2, check_duplicates = F)
+
+# 取出降維後的特徵值df
+feature_tsne <- comb.df %>%
+    select(doc_id, status) %>%
+    mutate(status = as.factor(status)) %>%
+    bind_cols(as.data.frame(tsne$Y))
+
+
+save(feature_tsne, file = "feature_tsne.rds")
+
+```
+
+
+# 7. SVM （support vector machine）
+
+```{r}
+
+# 隨機構建訓練集與測試集
+# 60%資料為訓練集，其餘為測試集
+set.seed(2017)
+
+samples <- sample(1:nrow(feature_tsne), 
+                  size = round(nrow(feature_tsne)*0.6))
+
+trainset <- feature_tsne %>% select(-doc_id) %>% slice(samples)
+testset <- feature_tsne[-samples,-1]
+
+
+
+library(e1071)
+
+# 建立 SVM 分類器model，機器學習主體函式
+# labels~ 表示除去labels的資料，其他數據均進入機器學習中。 labels之資料作為分類標的。
+# kernel 表示svm之核函式，此次選用Radial
+model <- svm(status~ ., data = trainset, kernel="radial")
+
+# 預測函式主體
+predicting  <- predict(model, testset %>% select(-status))
+
+# 對比統計預測與實際之差
+table(predicting, testset$status)
+
+# 計算預測準確率
+pre <- predicting == testset$status
+percent1 <- length(pre[pre == T]) / length(pre)
+percent1
+```
