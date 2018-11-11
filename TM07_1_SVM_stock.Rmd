@@ -1,8 +1,15 @@
 ---
 title: "SVM & Stock Price Prediction"
-author: "ZHAODONG WANG"
-date: "2018-01-05"
-output: html_document
+author: "Jilung Hsieh"
+date: "2018/7/3"
+output: 
+  html_notebook: 
+    number_sections: true
+    highlight: textmate
+    theme: spacelab
+    toc: yes
+editor_options: 
+  chunk_output_type: inline
 ---
 
 
@@ -27,6 +34,7 @@ options(stringsAsFactors = F)
 ```{r}
 load("data/stock_news.RData")
 stock_news %>% names
+stock_news %>% select(newsId, words, time, code, status_p, status_v, everything()) %>% View
 ```
 
 
@@ -63,8 +71,8 @@ unnested.df <- stock_news %>%
 ```{r}
 unnested.df %>%
     count(doc_id, word) %>%
-    spread(word, n, fill = 0) %>%
-    dim
+    spread(word, n, fill = 0) %>% dim
+select(1:20) %>% head(100) %>% View
 ```
 
 
@@ -85,41 +93,51 @@ chi_df <- unnested.df %>%
 ```
 
 
+# 5. Counting doc term frequency after feature selection
+```{r}
+doc_term_count <- unnested.df %>%
+    left_join(chi_df) %>%
+    filter(!is.na(chi2)) %>%
+    count(doc_id, word)
+```
+
+```{r}
+doc_term_count %>%
+    spread(word, n, fill = 0) %>%
+    dim
+```
 
 
 
-# 5. TF-IDF（term frequency & inverse document frequency）
+
+
+# 6. TF-IDF（term frequency & inverse document frequency）
 
 ```{r}
 library(tidytext)
 # install.packages("tidytext")
 # dtm <- cast_dtm(word_token, title, words, n)
 # ??cast_dtm
-
-comb.df <- unnested.df %>%
-  left_join(chi_df) %>%
-  filter(!is.na(chi2)) %>%
-  count(doc_id, word) %>%
-  bind_tf_idf(word, doc_id, n) %>%
-  select(doc_id, word, tf_idf) %>%
-  spread(word, tf_idf, fill=0) %>%
-  left_join(select(stock_news, doc_id = newsId, status = status_p)) %>%
+comb.df <- doc_term_count %>%
+    tidytext::bind_tf_idf(word, doc_id, n) %>%
+    select(doc_id, word, tf_idf) %>%
+    spread(word, tf_idf, fill=0) %>%
+    left_join(select(stock_news, doc_id = newsId, status = status_p)) %>%
     select(doc_id, status, everything())
 ```
 
 
 
 
-# 6. T-SNE
+# 7. T-SNE
 
 
 ```{r}
-library(Rtsne) # cannot be installed in MacOS mojave
+library(Rtsne) 
 
 tsne <- comb.df %>% select(-doc_id, -status) %>%
     Rtsne(perplexity = 35, dims = 2, check_duplicates = F)
 
-# 取出降維後的特徵值df
 feature_tsne <- comb.df %>%
     select(doc_id, status) %>%
     mutate(status = as.factor(status)) %>%
@@ -138,22 +156,8 @@ feature_tsne %>%
 
 
 
-# 7. SVM （support vector machine）
 
-```{r}
-trainset <- feature_tsne %>% select(-doc_id)
-model <- svm(status ~ ., data = trainset)
-
-
-?svm
-# as.data.frame(model$SV) %>% 
-#     mutate(id = as.numeric(rownames(.))) %>%
-#     left_join(feature_tsne %>% select(doc_id, status, id)) %>%
-#     ggplot() + aes(V1, V2, color = status) + 
-#     geom_point()
-```
-
-# divide to tranining and testing set
+# 8. divide to tranining and testing set
 ```{r}
 set.seed(2017)
 
@@ -167,7 +171,7 @@ testset <- feature_tsne[-samples,-1]
 
 
 
-
+# 9. SVM
 ```{r}
 
 library(e1071)
