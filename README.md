@@ -60,10 +60,14 @@
 * [SlideML08-1: PCA](https://docs.google.com/presentation/d/e/2PACX-1vRhbsGGw0xYHisqd9IxqiOJ7iDYic0WjipPEwlI3J8LkaBYokP20oyOlKiGE7lyXBCAhBnBL4harpmV/pub?start=false&loop=false&delayms=3000): Code 1 [R08_1_PCA_iris.Rmd](R08_1_PCA_iris.Rmd), Code 2 [R08_2_PCA_marraige_equality.Rmd](R08_2_PCA_marraige_equality.Rmd), **Code 3 [R08_3_PCA_citizenMiaoKo.Rmd](R08_3_PCA_citizenMiaoKo.Rmd)**
 
 ## W10: 11/12
+* [Assignment #7]() No later than **11/17 23:59**
+* [Review and Self-learning resource](https://docs.google.com/presentation/d/e/2PACX-1vTlc2NcLyX9YJ_ghkPcB3quEC9FtGeBpDp3RoolUab4MXw6kCqYlJGo_J9H-zsWDApKXX1Y23yy4mqE/pub?start=false&loop=false&delayms=3000)
+* [SlideML09: SVM](https://docs.google.com/presentation/d/e/2PACX-1vRVudHBYlfrtXZDu7zIdbde3_dB3gIXrl6S0lMSARfRfA__m0TPL-AmQvVMdEIE6BqU6dLgQWJ-QYwP/pub?start=false&loop=false&delayms=3000)
+
+# More
 * [SlideTM07. Topic modeling](https://docs.google.com/presentation/d/e/2PACX-1vRTSSO_8JuLTK_1OyM9eDrogA-K2fhXQwlKxh1PpRvNavkurCCcKBNftv9MpKGYM6EDXtNnqZvPDdKy/pub?start=false&loop=false&delayms=3000)
 * [SlideTM08: word2vec](https://docs.google.com/presentation/d/e/2PACX-1vSaDbagemtALMf0F5CJViNvLUI7U7cGJtelziV5IdKOridKI28DQ85sWWpVa1Y_1G3vH0bkKMAzW-XZ/pub?start=false&loop=false&delayms=3000)
-* [Assignment #7]() No later than **11/17 23:59**
-* [SlideML09: SVM](https://docs.google.com/presentation/d/e/2PACX-1vRVudHBYlfrtXZDu7zIdbde3_dB3gIXrl6S0lMSARfRfA__m0TPL-AmQvVMdEIE6BqU6dLgQWJ-QYwP/pub?start=false&loop=false&delayms=3000)
+
 
 
 # Images
