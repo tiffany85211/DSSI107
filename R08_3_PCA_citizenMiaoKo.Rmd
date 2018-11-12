@@ -34,10 +34,13 @@ high_user2015 <- reaction2015 %>%
 	count(id, sort = TRUE) %>%
 	filter(n >= 5)
 
-like2pid2015 <-  reaction2015%>%
+reaction2015%>%
 	count(id, pid) %>%
 	filter(id %in% high_user2015$id) %>%
-	spread(pid, n, fill=0)
+	spread(id, n, fill = 0) %>% 
+    select(1:100) %>% 
+    head(100)
+    View
 
 dim(like2pid2015)
 ```
