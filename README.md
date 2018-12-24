@@ -9,6 +9,7 @@
 * [Interesting open data](https://github.com/P4CSS/p4css.github.io/blob/master/data.md)
 
 # Announce
+* [DSPIM 農地重金屬汙染](https://github.com/dspim/farmland-pollution-in-practice)
 * [謝舒凱老師的投影片和ipynb](https://github.com/lopentu/BestPracticeInCorpusProgramming/tree/master/%E8%AA%9E%E6%96%99%E5%BA%AB%E9%96%8B%E6%94%BE%E6%A1%86%E6%9E%B6%E5%8F%8A%E4%B8%8A%E7%B7%9A%E9%83%A8%E7%BD%B2)
 
 ## Recommended books
